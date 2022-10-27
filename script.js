@@ -1,18 +1,5 @@
 "use strict";
 
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
-
-let angle_x = 0.0;
-let angle_y = 0.0;
-let angle_z = 0.0;
-let angle_w = 0.0;
-
-let speed_x = 0.05;
-let speed_y = 0.00;
-let speed_z = 0.05;
-let speed_w = 0.05;
-
 const cube = [
     // x   y   z   w
     [ -1, -1, -1,  1 ], // 0
@@ -34,30 +21,13 @@ const cube = [
 ];
 
 
-function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-
-    const transX = canvas.width * 0.5;
-    const transY = canvas.height * 0.5;
-    ctx.translate(transX, transY);
+function setup() {
+    ctx.translate(canvas.width * 0.5, canvas.height * 0.5);
+    opt_speed_x = 0.01;
+    opt_speed_y = 0.01;
+    opt_speed_z = 0.01;
+    opt_speed_w = 0.01;
 }
-
-function preload() {
-    speed_x = 0.01;
-    speed_y = 0.01;
-    speed_z = 0.01;
-    speed_w = 0.01;
-}
-
-window.onload = () => {
-    preload();
-    resize();
-    draw();
-}
-
-window.addEventListener('resize', resize, false);
-//------------------------------------------------------------------------------
 
 function connect(obj, i, j, color = '#88c') {
     let v0 = obj[i];
@@ -100,25 +70,24 @@ function connectLines(obj) {
 }
 
 function draw() {
-    ctx.fillStyle = "#1a1a30";
-    ctx.fillRect(-ctx.canvas.width/2, -ctx.canvas.height/2,
+    ctx.clearRect(-ctx.canvas.width/2, -ctx.canvas.height/2,
                  ctx.canvas.width, ctx.canvas.height);
 
-    angle_x += speed_x;
-    angle_y += speed_y;
-    angle_z += speed_z;
-    angle_w += speed_w;
+    opt_angle_x += opt_speed_x;
+    opt_angle_y += opt_speed_y;
+    opt_angle_z += opt_speed_z;
+    opt_angle_w += opt_speed_w;
 
     const distance = 2.0;
 
     let phase = structuredClone(cube);
     phase.forEach((v, i) => {
         // rotate:
-        let rotated = matmul(v, rotate_xy(angle_z));
-        rotated = matmul(rotated, rotate_zw(angle_w));
+        let rotated = matmul(v, rotate_xy(opt_angle_z));
+        rotated = matmul(rotated, rotate_zw(opt_angle_w));
         rotated = matmul(rotated, rotate_x(Math.PI / 2));
-        rotated = matmul(rotated, rotate_y(angle_y));
-        rotated = matmul(rotated, rotate_x(angle_x));
+        rotated = matmul(rotated, rotate_y(opt_angle_y));
+        rotated = matmul(rotated, rotate_x(opt_angle_x));
 
         // scale:
         const scalar = canvas.width / 7;
@@ -144,6 +113,7 @@ function draw() {
 
     connectLines(phase);
 
+    controls_tick();
     requestAnimationFrame(draw);
 }
 

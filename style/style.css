@@ -4,12 +4,8 @@ html, body {
   width:100%;
   height:100%;
   color: #cccccc;
+  background: #112;
   font-family: 'Courier New', monospace;
-}
-
-canvas {
-  background: #eee;
-  display:block;
 }
 
 div {

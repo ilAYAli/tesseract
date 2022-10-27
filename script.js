@@ -7,8 +7,9 @@ let angle_x = 0.0;
 let angle_y = 0.0;
 let angle_z = 0.0;
 let angle_w = 0.0;
+
 let speed_x = 0.05;
-let speed_y = 0.05;
+let speed_y = 0.00;
 let speed_z = 0.05;
 let speed_w = 0.05;
 
@@ -66,8 +67,8 @@ function connect(obj, i, j, color = '#88c') {
     ctx.lineTo(v1[0], v1[1]);
 
     ctx.lineCap = 'round';
-    ctx.globalAlpha = 0.9;
-    ctx.lineWidth = 1;
+    ctx.globalAlpha = 0.5;
+    ctx.lineWidth = 3;
     ctx.strokeStyle = color;
     ctx.stroke();
 }
@@ -114,8 +115,9 @@ function draw() {
     phase.forEach((v, i) => {
         // rotate:
         let rotated = matmul(v, rotate_xy(angle_z));
-        rotated = matmul(rotated, rotate_zw(angle_z));
+        rotated = matmul(rotated, rotate_zw(angle_w));
         rotated = matmul(rotated, rotate_x(Math.PI / 2));
+        rotated = matmul(rotated, rotate_y(angle_y));
         rotated = matmul(rotated, rotate_x(angle_x));
 
         // scale:
@@ -133,6 +135,7 @@ function draw() {
     // vertex emphasis:
     phase.forEach((v) => {
         ctx.beginPath();
+        ctx.globalAlpha = 0.9;
         ctx.arc(v[0], v[1],
                 Math.max(canvas.width / 200, 4), 0, 2 * Math.PI);
         ctx.fillStyle = '#88c';

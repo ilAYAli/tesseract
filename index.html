@@ -1,16 +1,35 @@
 <!DOCTYPE html>
 <html lang="eng">
 <head>
-    <title>2d canvas</title>
+    <title>Tesseract</title>
     <meta charset="UTF-8">
     <meta http=equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width,height=768" initia-scale=1">
     <link rel="stylesheet" href="style/style.css" />
 </head>
 <body>
+  <div class="slidecontainer">
+    <p>x speed:</p>
+    <input type="range" min="0" max="1000" value="35" class="slider" id="xspeed">
+    <p>y speed</p>
+    <input type="range" min="0" max="1000" value="250" class="slider" id="yspeed">
+    <p>z speed</p>
+    <input type="range" min="0" max="1000" value="87" class="slider" id="zspeed">
+    <p>w speed</p>
+    <input type="range" min="0" max="1000" value="250" class="slider" id="wspeed">
+
+    <p>x angle</p>
+    <input type="range" min="0" max="360" value="0" class="slider" id="xangle">
+    <p>y angle</p>
+    <input type="range" min="0" max="360" value="0" class="slider" id="yangle">
+    <p>z angle</p>
+    <input type="range" min="0" max="360" value="0" class="slider" id="zangle">
+    <p>w angle</p>
+    <input type="range" min="0" max="360" value="0" class="slider" id="wangle">
+  </div>
     <canvas id="canvas"</canvas>
     <script src="script.js"></script>
     <script src="matrix.js"></script>
-    <script src="model/utah-teapot.js"></script>
+    <script src="sliders.js"></script>
 </body>
 </html>

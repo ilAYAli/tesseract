@@ -5,12 +5,12 @@ let fps = new Fps();
 let opt_angle_x = 0.0;
 let opt_angle_y = 0.0;
 let opt_angle_z = 0.0;
-let opt_angle_w = 0.0;
+let opt_angle_zw = 0.0;
 
 let opt_speed_x = 0.05;
 let opt_speed_y = 0.00;
 let opt_speed_z = 0.05;
-let opt_speed_w = 0.05;
+let opt_speed_zw = 0.05;
 
 // speed:
 let xs = document.getElementById("xspeed");
@@ -27,7 +27,7 @@ zs.oninput = function() {
 }
 let ws = document.getElementById("wspeed");
 ws.oninput = function() {
-    opt_speed_w = Number(ws.value) / 10000;
+    opt_speed_zw = Number(ws.value) / 10000;
 }
 
 // angle:
@@ -45,7 +45,7 @@ za.oninput = function() {
 }
 let wa = document.getElementById("wangle");
 wa.oninput = function() {
-    opt_angle_w = Number(wa.value);
+    opt_angle_zw = Number(wa.value);
 }
 
 let p_fps = document.getElementById("p_fps");
@@ -65,11 +65,10 @@ function controls_tick() {
     p_xspeed.innerText = "x speed: " + parseFloat(opt_speed_x).toFixed(2);
     p_yspeed.innerText = "y speed: " + parseFloat(opt_speed_y).toFixed(2);
     p_zspeed.innerText = "z speed: " + parseFloat(opt_speed_z).toFixed(2);
-    p_wspeed.innerText = "w speed: " + parseFloat(opt_speed_w).toFixed(2);
+    p_wspeed.innerText = "zw speed:" + parseFloat(opt_speed_zw).toFixed(2);
 
     p_xangle.innerText = "x angle: " + parseFloat(opt_angle_x).toFixed(2);
     p_yangle.innerText = "y angle: " + parseFloat(opt_angle_y).toFixed(2);
     p_zangle.innerText = "z angle: " + parseFloat(opt_angle_z).toFixed(2);
-    p_wangle.innerText = "w angle: " + parseFloat(opt_angle_w).toFixed(2);
-
+    p_wangle.innerText = "zw angle:" + parseFloat(opt_angle_zw).toFixed(2);
 }

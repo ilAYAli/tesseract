@@ -26,10 +26,10 @@ function setup() {
     opt_speed_x = 0.01;
     opt_speed_y = 0.01;
     opt_speed_z = 0.01;
-    opt_speed_w = 0.01;
+    opt_speed_zw = 0.01;
 }
 
-function connect(obj, i, j, color = '#88c') {
+function connect(obj, i, j, color = '#ccc') {
     let v0 = obj[i];
     let v1 = obj[j];
     ctx.beginPath();
@@ -76,7 +76,7 @@ function draw() {
     opt_angle_x += opt_speed_x;
     opt_angle_y += opt_speed_y;
     opt_angle_z += opt_speed_z;
-    opt_angle_w += opt_speed_w;
+    opt_angle_zw += opt_speed_zw;
 
     const distance = 2.0;
 
@@ -84,7 +84,7 @@ function draw() {
     phase.forEach((v, i) => {
         // rotate:
         let rotated = matmul(v, rotate_xy(opt_angle_z));
-        rotated = matmul(rotated, rotate_zw(opt_angle_w));
+        rotated = matmul(rotated, rotate_zw(opt_angle_zw));
         rotated = matmul(rotated, rotate_x(Math.PI / 2));
         rotated = matmul(rotated, rotate_y(opt_angle_y));
         rotated = matmul(rotated, rotate_x(opt_angle_x));
